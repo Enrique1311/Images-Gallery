@@ -7,15 +7,22 @@
 	font-family: sans-serif;
 }
 
+:root {
+	--primary-color: #565555;
+	--secondary-color: #969697;
+	--background-color: #faf8f8;
+	--white-color: #ffffff;
+}
+
 header {
-	background-color: #6b6a6a;
+	background-color: var(--primary-color);
 	display: flex;
 	justify-content: center;
 	padding: 0.5rem 2rem;
 	position: fixed;
 	top: 0;
 	width: 100%;
-	color: white;
+	color: var(--white-color);
 }
 
 main {
@@ -24,11 +31,11 @@ main {
 	padding: 1rem;
 }
 
-.drag-drop {
+.drag-drop-zone {
 	padding: 3rem;
 	text-align: center;
-	border: 4px dashed rgb(170, 170, 170);
-	color: #6b6a6a;
+	border: 4px dashed var(--secondary-color);
+	color: var(--secondary-color);
 }
 
 .gallery-container {

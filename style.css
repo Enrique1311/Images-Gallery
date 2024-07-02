@@ -3,7 +3,6 @@
 	padding: 0;
 	box-sizing: border-box;
 	scroll-behavior: smooth;
-
 	font-family: sans-serif;
 }
 
@@ -11,6 +10,7 @@
 	--primary-color: #565555;
 	--secondary-color: #969697;
 	--background-color: #faf8f8;
+	--green-color: #c7f7e7;
 	--white-color: #ffffff;
 }
 
@@ -26,9 +26,10 @@ header {
 }
 
 main {
-	background-color: #faf8f8;
+	background-color: var(--background-color);
 	margin-top: 3rem;
 	padding: 1rem;
+	height: calc(100vh - 3rem);
 }
 
 .drag-drop-zone {
@@ -36,18 +37,36 @@ main {
 	text-align: center;
 	border: 4px dashed var(--secondary-color);
 	color: var(--secondary-color);
+	position: relative;
+	z-index: 20;
 }
 
 .gallery-container {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-	grid-auto-rows: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	flex-wrap: wrap;
 	gap: 1rem;
-	min-height: 100vh;
+	padding-top: 2rem;
+}
+
+.loading-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	background-color: var(--green-color);
+	width: 0;
+	z-index: 10;
+	visibility: hidden;
 }
 
 .gallery-img {
-	width: 100%;
-	height: 100%;
+	max-width: 400px;
 	object-fit: cover;
 }

@@ -1,5 +1,6 @@
 const d = document;
 const $dragDropZone = d.querySelector(".drag-drop-zone");
+const $galleryContainer = d.querySelector(".gallery-container");
 
 $dragDropZone.addEventListener("dragover", (e) => {
 	e.preventDefault();
@@ -25,8 +26,26 @@ const changeStyle = (obj, color, backgroundColor) => {
 
 const loadFile = (file) => {
 	const reader = new FileReader();
-	reader.readAsText(file);
+	reader.readAsDataURL(file);
+	reader.addEventListener("progress", (e) => {
+		let loading = Math.round(e.loaded / file.size) * 100;
+		const $loadingBar = d.querySelector(".loading-bar");
+		$loadingBar.style.transition = "width 0.4s linear";
+		$loadingBar.style.visibility = "visible";
+		$loadingBar.style.width = `${loading}%`;
+
+		setTimeout(() => {
+			$loadingBar.style.visibility = "hidden";
+			$loadingBar.style.transition = "none";
+			$loadingBar.style.width = 0;
+		}, 400);
+	});
+
 	reader.addEventListener("load", (e) => {
-		d.querySelector(".gallery-container").textContent = e.target.result;
+		let url = URL.createObjectURL(file);
+		let img = d.createElement("img");
+		img.setAttribute("src", url);
+		img.classList.add("gallery-img");
+		$galleryContainer.appendChild(img);
 	});
 };
